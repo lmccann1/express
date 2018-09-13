@@ -21,9 +21,7 @@ router.get('/login', function (req, res) {
     console.log('going to login');
     res.end();
 
-})
-
-
+});
 
 router.get('/', function(req, res){
 
