@@ -31,13 +31,20 @@ app.set('view engine', 'ejs');
 app.use(bodyParser.urlencoded({ extended: false}));
 app.use(bodyParser.json());
 
-app.get('/inbox', function (req, res) {
-    res.render('inbox', {
-        inbox: 'INBOX',
+app.get('/inbox', function (req, res,) {
+    var query = "SELECT * FROM emails where ToUser = '"+req.session.user+"'";
+    conn.query(query, function(err, results){
+        console.log(results);
+        res.render('inbox', {
+            results: results
+        });
+        res.end();
     });
+    // res.render('inbox', {
+    //     inbox: 'INBOX',
+    // });
     console.log('iboxxxxxx');
 });
-
 
 app.get('/signup', function (req, res) {
   res.render('signup', {
@@ -74,6 +81,8 @@ app.get('/login', function(req, res){
     });
     console.log('loginnnnnnn');
 });
+
+
 app.post('/user/login', function(req, res){
 
    // var message = '';
@@ -87,22 +96,29 @@ app.post('/user/login', function(req, res){
     var selectQuery = "SELECT User_id, username FROM `accounts` WHERE username = '"+user.username+"' and password = '"+user.password+"'";
     conn.query(selectQuery, function(err, results){
         if(results.length){
-            s.req.session.User_id = results[0].id;
-            s.req.session.user = results[0];
-            console.log(results[0].id);
-            console.log(s.req.session.user);
+            req.session.User_id = results[0].id;
+            req.session.user = results[0].username;
+            console.log(results[0].User_id);
+            console.log(results);
+            console.log(req.session.user);
             res.redirect('/inbox');
         }
-        // else{
-        //     message = "wrong login details"
-        //     res.render('login.ejs', {message: message});
-        //
-        // }
+        else{
+            // message = "wrong login details"
+            // res.render('login.ejs', {message: message});
+            console.log("incorrect details")
+        }
 
+
+    });
+    app.get('/compose', function(req, res){
+        res.render('compose',{
+            compose: 'compose',
+        });
+        console.log('loefefefnnnnn');
     });
 
 });
-
 
 
 app.use(routes);

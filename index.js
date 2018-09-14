@@ -17,6 +17,13 @@ router.get('/login', function (req, res) {
 
 router.get('/inbox', function(req, res){
     res.write("<h1>Inbox Page</h1>");
+    res.write("<a href='/'>Logout</a>");
+    res.end();
+
+});
+
+router.get('/compose', function(req, res){
+    res.write("<h1>compose</h1>")
     res.end();
 
 });

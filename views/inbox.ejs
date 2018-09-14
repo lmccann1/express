@@ -2,11 +2,42 @@
 <html>
 <head>
     <title>Inbox</title>
+<style>
+    table {
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+    }
+
+    td, th {
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 8px;
+    }
+
+    tr:nth-child(even) {
+    background-color: #dddddd;
+    }
+    </style>
 </head>
 
 <body>
-<h1><%= inbox %></h1>
+<h1>Inbox</h1>
+    <table>
+        <tr>
+            <th>From</th>
+            <th>Subject</th>
+            <th>Date</th>
+        </tr>
+        <% results.forEach(function (email) { %>
+        <tr>
+            <td><%=email.FromUser %></td>
+            <td><%=email.Subject %></td>
+            <td><%=email.Date %></td>
+        </tr>
+        <%})%>
 
+    </table>
 
 
 </body>
