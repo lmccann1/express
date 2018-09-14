@@ -1,16 +1,8 @@
 var express = require('express');
 var router = express.Router();
 
-// router.get('/', function (req,res){
-//    // res.render('index', {title: ''});
-//
-// });
 router.get('/signup', function (req, res) {
 
-   // res.render('test', {
-   //   signup: 'signup form',
-
-  //  });
     res.write("<a href='/'>Home</a>");
     console.log('accessing signup page');
     res.end();
@@ -19,6 +11,12 @@ router.get('/signup', function (req, res) {
 router.get('/login', function (req, res) {
     res.write("<a href='/'>Home</a>");
     console.log('going to login');
+    res.end();
+
+});
+
+router.get('/inbox', function(req, res){
+    res.write("<h1>Inbox Page</h1>");
     res.end();
 
 });
